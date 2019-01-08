@@ -72,7 +72,9 @@ static inline void *safe_malloc_(size_t size)
 	/* malloc(0) is undefined; FLAC src convention is to always allocate */
 	if(!size)
 		size++;
-	return malloc(size);
+	void* ptr = malloc(size);
+	memset(ptr, 0, size);
+	return ptr;
 }
 
 static inline void *safe_calloc_(size_t nmemb, size_t size)
