@@ -46,6 +46,7 @@
 #include <stdint.h> /* for SIZE_MAX in case limits.h didn't get it */
 #endif
 #include <stdlib.h> /* for size_t, malloc(), etc */
+#include <string.h>
 #include "share/compat.h"
 
 #ifndef SIZE_MAX
@@ -150,7 +151,9 @@ static inline void *safe_malloc_muladd2_(size_t size1, size_t size2, size_t size
 		return 0;
 	if(size1 > SIZE_MAX / size2)
 		return 0;
-	return malloc(size1*size2);
+	void * ptr = malloc(size1*size2);
+	memset(ptr, 0, size1*size2);
+	return ptr;
 }
 
 static inline void *safe_realloc_(void *ptr, size_t size)
