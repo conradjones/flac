@@ -215,5 +215,7 @@ void *safe_malloc_mul_2op_p(size_t size1, size_t size2)
 		return malloc(1); /* malloc(0) is undefined; FLAC src convention is to always allocate */
 	if(size1 > SIZE_MAX / size2)
 		return 0;
-	return malloc(size1*size2);
+	void* ptr = malloc(size1*size2);
+	memset(ptr, 0, size1*size2);
+	return ptr;
 }
