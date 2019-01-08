@@ -167,6 +167,7 @@ FLAC__bool FLAC__bitwriter_init(FLAC__BitWriter *bw)
 	bw->words = bw->bits = 0;
 	bw->capacity = FLAC__BITWRITER_DEFAULT_CAPACITY;
 	bw->buffer = malloc(sizeof(bwword) * bw->capacity);
+	memset(bw->buffer, 0, sizeof(bwword) * bw->capacity);
 	if(bw->buffer == 0)
 		return false;
 
